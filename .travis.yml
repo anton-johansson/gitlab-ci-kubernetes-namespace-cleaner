@@ -1,0 +1,38 @@
+language: go
+go:
+  - 1.12.x
+env:
+  - GO111MODULE=on
+stages:
+  - test
+  - build
+  - deploy
+before_install:
+  - make install
+jobs:
+  include:
+    - stage: test
+      script:
+        - make fmt
+        - make vet
+        - make test
+    - stage: build
+      script:
+        - make docker
+    - stage: deploy
+      script:
+        - make linux
+        - make darwin
+        - make windows
+        - make docker
+        - make docker-push
+      deploy:
+        provider: releases
+        api_key: '$GITHUB_TOKEN'
+        file:
+          - './bin/gitlab-ci-kubernetes-namespace-cleaner-darwin-amd64'
+          - './bin/gitlab-ci-kubernetes-namespace-cleaner-linux-amd64'
+          - './bin/gitlab-ci-kubernetes-namespace-cleaner-windows-amd64.exe'
+        skip_cleanup: true
+        on:
+          tags: true
