@@ -44,7 +44,7 @@ docker:
 	docker build -t ${IMAGE}:${VERSION} .
 
 docker-push:
-        echo '${DOCKER_PASSWORD}' | docker login --username ${DOCKER_USERNAME} --password-stdin
+	echo '${DOCKER_PASSWORD}' | docker login --username ${DOCKER_USERNAME} --password-stdin
 	docker push ${IMAGE}:${VERSION}
 
 clean:
