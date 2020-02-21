@@ -2,12 +2,12 @@ package clean
 
 import (
 	"fmt"
-	"regexp"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
+	_ "k8s.io/client-go/plugin/pkg/client/auth"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
-	_ "k8s.io/client-go/plugin/pkg/client/auth"
+	"regexp"
 )
 
 func config(kubeconfig string) *rest.Config {
@@ -22,7 +22,7 @@ func Clean(kubeconfig string) {
 	config := config(kubeconfig)
 	clientset, err := kubernetes.NewForConfig(config)
 	if err != nil {
-		panic(err.Error());
+		panic(err.Error())
 	}
 
 	namespaces, err := clientset.CoreV1().Namespaces().List(metav1.ListOptions{})
@@ -32,7 +32,7 @@ func Clean(kubeconfig string) {
 
 	for _, namespace := range namespaces.Items {
 		var namespaceName string = namespace.ObjectMeta.Name
-		
+
 		matched, err := regexp.MatchString("^gitlab-ci-test-.+", namespaceName)
 		if err != nil {
 			fmt.Println(err.Error())
