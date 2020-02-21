@@ -21,6 +21,11 @@ $ bin/gitlab-ci-kubernetes-namespace-cleaner-linux-amd64 clean --kubeconfig /hom
 ```
 
 
+## Running inside cluster
+
+You can find Kubernetes manifests for running this tool inside the cluster [here](./deploy).
+
+
 ## License
 
 Apache License 2.0 © [Anton Johansson](https://github.com/anton-johansson)
