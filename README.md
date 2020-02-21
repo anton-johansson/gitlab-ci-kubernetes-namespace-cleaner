@@ -17,3 +17,8 @@ $ make
 ```shell
 $ bin/gitlab-ci-kubernetes-namespace-cleaner-linux-amd64 clean --kubeconfig /home/myuser/.kube/config
 ```
+
+
+## License
+
+Apache License 2.0 © [Anton Johansson](https://github.com/anton-johansson)
