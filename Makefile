@@ -3,7 +3,7 @@
 BINARY = gitlab-ci-kubernetes-namespace-cleaner
 REPOSITORY = github.com/anton-johansson/${BINARY}
 IMAGE = antonjohansson/${BINARY}
-VERSION = 0.0.0
+VERSION = $(git describe --abbrev=0 --tags)
 
 GO_VERSION = $(shell go version | awk -F\go '{print $$3}' | awk '{print $$1}')
 COMMIT = $(shell git rev-parse HEAD)
