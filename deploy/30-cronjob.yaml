@@ -24,3 +24,7 @@ spec:
           containers:
             - name: cleaner
               image: antonjohansson/gitlab-ci-kubernetes-namespace-cleaner:v0.1.0
+              env:
+                # You can change this regex match to delete other Gitlab namespaces
+                - name: NAMESPACE_MATCH
+                  value: "^gitlab-ci-test-.+"
